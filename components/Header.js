@@ -1,25 +1,24 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Image } from "react-native";
-import NeedRideList from "./needRideList/NeedRideList";
+
+import { StyleSheet, Text, View } from "react-native";
 
 export default function Header() {
   return (
     <View style={styles.header}>
-      <Text style={styles.text}>BYUI ez Board</Text>
+      <Text style={styles.text}>BYUI Hub</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: "blue",
-    height: 60,
-    paddingTop: 20,
-    },
+    backgroundColor: "rgb(0, 110, 182)",
+    padding: 10,
+  },
   text: {
     color: "white",
-    fontSize: 20,
+    fontSize: 28,
     textAlign: "center",
+    fontFamily: "Cochin",
     fontWeight: "bold",
-  }
+  },
 });
