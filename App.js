@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, Text } from "react-native";
-import { Header, Main, NavBarBottom } from "./components";
+import { Header, Main, NavBarBottom, Footer } from "./components";
 
 export default function App() {
   return (
@@ -8,6 +8,7 @@ export default function App() {
       <Header />
       <Main />
       <NavBarBottom />
+      <Footer />
       <StatusBar style="auto" />
     </View>
   );
@@ -16,6 +17,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,
+    marginTop: 50,
   },
 });

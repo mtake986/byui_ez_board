@@ -4,12 +4,9 @@ import {
   Modal,
   StyleSheet,
   Text,
-  Pressable,
   View,
-  TouchableOpacity,
 } from "react-native";
 import FormInsideModal from "./FormInsideModal";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import CloseBtn from "./CloseBtn";
 
 
@@ -40,9 +37,9 @@ export default function ModalWrapper({ modalVisible, setModalVisible }) {
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
-    marginTop: 22,
+    marginTop: 150,
   },
   modalView: {
     margin: 20,

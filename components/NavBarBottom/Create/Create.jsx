@@ -28,18 +28,9 @@ export default function Create() {
 
 
 const styles = StyleSheet.create({
-	// Footer 
-  container: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "flex-end",
-    justifyContent: "space-around",
-    height: "10%",
-    backgroundColor: "rgb(160, 212, 237)",
-  },
   flexItem: {
     color: "rgb(0, 110, 182)",
     padding: 10,
-    fontSize: "20px",
+    fontSize: "32px",
   },
 });

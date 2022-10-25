@@ -15,6 +15,6 @@ export default function FormInsideModal() {
 
 const styles = StyleSheet.create({
   form: {
-    marginVertical: 30,
+    marginVertical: 10,
   },
 });

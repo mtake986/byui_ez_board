@@ -1,14 +1,9 @@
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import Create from './Create/Create';
+import Create from "./Create/Create";
 
-export default function MenuBarBottom() {
-
+export default function NavBarBottom() {
   return (
     <View style={styles.container}>
       {/* Home */}
@@ -31,7 +26,7 @@ export default function MenuBarBottom() {
       {/* Profile */}
       <View>
         <TouchableOpacity onPress={() => alert("clicked: menu")}>
-          <FontAwesome5 name={"user"} style={styles.flexItem} />
+          <FontAwesome5 name={"user"} style={styles.flexItem} solid />
         </TouchableOpacity>
       </View>
 
@@ -46,66 +41,16 @@ export default function MenuBarBottom() {
 }
 
 const styles = StyleSheet.create({
-	// Footer 
   container: {
     flex: 1,
     flexDirection: "row",
-    alignItems: "flex-end",
+    alignItems: "center",
     justifyContent: "space-around",
-    height: "10%",
-    backgroundColor: "rgb(160, 212, 237)",
+    backgroundColor: "rgb(228, 241, 247)",
   },
   flexItem: {
     color: "rgb(0, 110, 182)",
     padding: 10,
-    fontSize: "20px",
+    fontSize: "28px",
   },
-
-	// Related to Modal
-  modalOpenBtn: {
-    borderRadius: 5,
-    padding: 7,
-    margin: 10,
-    width: 100,
-  },
-  needBtn: {
-    backgroundColor: "rgb(206,58,52)",
-  },
-  giveBtn: {
-    backgroundColor: "rgb(0, 122, 255)",
-  },
-  text: {
-    textAlign: "center",
-    color: "white",
-    fontSize: 24,
-    fontFamily: "Avenir",
-    fontWeight: "bold",
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  textStyle: {
-    color: "black",
-    fontWeight: "bold",
-    textAlign: "center",
-  }
-
 });
