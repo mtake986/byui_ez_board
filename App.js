@@ -1,8 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, Text } from "react-native";
-import Header from "./components/Header";
-import Main from "./components/Main";
-import NavBarBottom from "./components/NavBarBottom/NavBarBottom";
+import { Header, Main, NavBarBottom } from "./components";
 
 export default function App() {
   return (

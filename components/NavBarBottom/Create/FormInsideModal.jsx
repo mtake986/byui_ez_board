@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import NeedGiveBtns from "./NeedGiveBtns";
-import BoardForm from "./BoardForm";
+import { NeedGiveBtns, BoardForm } from "../../";
 
 export default function FormInsideModal() {
   const [boardType, setBoardType] = useState(null);
