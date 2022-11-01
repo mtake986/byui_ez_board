@@ -15,6 +15,6 @@ export default function Main() {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-    height: "85%",
+    // height: "80%",
   },
 });

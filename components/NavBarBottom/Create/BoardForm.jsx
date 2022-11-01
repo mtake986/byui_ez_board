@@ -1,126 +1,261 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Text,
   TextInput,
   View,
   StyleSheet,
-  Button,
-  Modal,
-  TouchableOpacity,
+  StatusBar,
+  SafeAreaView,
+  ScrollView,
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { Calendar, CalendarList, Agenda } from "react-native-calendars";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { SubmitBtn } from "../../index";
 
-export default function BoardForm() {
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
+export default function BoardForm({ boardType }) {
+  const [fname, setFname] = useState();
+  const [lname, setLname] = useState();
+  const [leavingDateTime, setLeavingDateTime] = useState(new Date());
+  const [cityFrom, setCityFrom] = useState();
+  const [cityTo, setCityTo] = useState();
+  const [numOfSuitcases, setNumOfSuitcases] = useState();
+  const [maxSeats, setMaxSeats] = useState();
+  const [price, setPrice] = useState();
 
-  const [selectedDate, setSelectedDate] = useState();
-  const dateChange = (selectedDate) => {
-    const currentDate = selectedDate;
-    setSelectedDate(currentDate);
-    setShowModal(false);
-    console.log(currentDate);
+  const [allFieldsTypedIn, setAllFieldsTypedIn] = useState(false);
+
+  const handleLeavingDateTimeChange = (event, selectedDateTime) => {
+    setLeavingDateTime(selectedDateTime);
+    console.log(
+      `selectedDateTime: ${selectedDateTime}, leavingDateTime: ${leavingDateTime}`
+    );
+  };
+  const handleSubmit = () => {
+    console.log("========= handleSubmit =========");
+    alert(
+      `fname: ${fname}, 
+      lname: ${lname}, 
+      leavingDateTime: ${leavingDateTime},
+      cityFrom: ${cityFrom}, 
+      cityTo: ${cityTo}, 
+      numOfSuitcases: ${numOfSuitcases}, 
+      maxSeats: ${maxSeats}, 
+      price: ${price}, `
+    );
   };
 
-  const [showModal, setShowModal] = useState(false);
+  useEffect(() => {
+    if (fname &&
+        lname &&
+        leavingDateTime &&
+        cityFrom &&
+        cityTo &&
+        price &&
+        (numOfSuitcases || maxSeats)) {
+      setAllFieldsTypedIn(true);
+    } else {
+      setAllFieldsTypedIn(false);
+    }
+  }, [
+    fname,
+    lname,
+    leavingDateTime,
+    cityFrom,
+    cityTo,
+    price,
+    numOfSuitcases,
+    maxSeats,
+  ]);
+
   return (
     <View>
-      <Modal visible={showModal} animationType="fade">
-        <Calendar
-          style={{
-            // borderRadius: 20,
-            shadowColor: "#000",
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.1,
-            // shadowRadius: 2,
-            elevation: 2,
-            margin: 40,
-            marginTop: 100,
-          }}
-          onDayPress={(date) => {
-            dateChange(date);
-          }}
-          initialDate={selectedDate}
-          minDate={new Date()}
-          maxDate={"2022-12-31"}
-          // disableArrowLeft={true}
-          hideExtraDays={true}
-        />
-      </Modal>
+      <StatusBar barStyle="dark-content" />
+      <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.scroller}>
+          {/* First Name */}
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>First Name</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Ex.) Masahiro"
+              onChangeText={(newText) => setFname(newText)}
+              defaultValue={fname}
+            />
+          </View>
+          {/* Last Name */}
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Last Name</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Ex.) Takechi"
+              onChangeText={(newText) => setLname(newText)}
+              defaultValue={lname}
+            />
+          </View>
+          {/* Leaving Date & Time */}
+          <View style={styles.dateTimeLabelInputContainer}>
+            <Text style={[styles.label, styles.dateTimeLabel]}>
+              Leaving Date & Time
+            </Text>
+            <DateTimePicker
+              mode="datetime"
+              minimumDate={new Date()}
+              onChange={handleLeavingDateTimeChange}
+              value={leavingDateTime ? leavingDateTime : null}
+            />
+          </View>
+          {/* City From */}
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>City From</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Ex.) Rexburg"
+              onChangeText={(newText) => setCityFrom(newText)}
+              defaultValue={cityFrom}
+            />
+          </View>
 
-      <View style={styles.row}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>First Name</Text>
-          <TextInput
-            style={{ height: 40 }}
-            placeholder="Ex.) Masahiro"
-            onChangeText={(newText) => setFname(newText)}
-            defaultValue={fname}
-          />
-        </View>
-        <View>
-          <Text style={styles.label}>Last Name</Text>
-          <TextInput
-            style={{ height: 40 }}
-            placeholder="Ex.) Takechi"
-            onChangeText={(newText) => setLname(newText)}
-            defaultValue={lname}
-          />
-        </View>
-      </View>
-      <View style={styles.row}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Date</Text>
-          {selectedDate ? (
-            <View style={styles.dateAndIcon}>
-              <Text style={styles.dateText}>
-                {selectedDate.month} / {selectedDate.day}
-              </Text>
-              <FontAwesome5
-                onPress={() => setShowModal(true)}
-                name={"calendar"}
-                style={styles.flexItem}
+          {/* City To */}
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>City To</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Ex.) Salt Lake City"
+              onChangeText={(newText) => setCityTo(newText)}
+              defaultValue={cityTo}
+            />
+          </View>
+
+          {/* Max Seats / Number of Suitcases */}
+          {boardType === "Give" ? (
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Max Seats</Text>
+              <View style={styles.row}>
+                <Text style={styles.mark}>#</Text>
+                <TextInput
+                  style={[styles.input, styles.inputNumPad]}
+                  placeholder="Ex.) 4"
+                  onChangeText={(newText) => setMaxSeats(newText)}
+                  keyboardType="numeric"
+                  maxLength={1}
+                  defaultValue={maxSeats}
+                />
+              </View>
+            </View>
+          ) : boardType === "Need" ? (
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Num of Suitcases</Text>
+              <View style={styles.row}>
+                <Text style={styles.mark}>#</Text>
+                <TextInput
+                  style={[styles.input, styles.inputNumPad]}
+                  placeholder="Ex.) 2"
+                  onChangeText={(newText) => setNumOfSuitcases(newText)}
+                  keyboardType="numeric"
+                  maxLength={1}
+                  defaultValue={numOfSuitcases}
+                />
+              </View>
+            </View>
+          ) : null}
+
+          {/* Price */}
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Price</Text>
+            <View style={styles.row}>
+              <Text style={styles.mark}>$</Text>
+              <TextInput
+                style={[styles.input, styles.inputNumPad]}
+                placeholder="Ex.) 25"
+                onChangeText={(newText) => setPrice(newText)}
+                keyboardType="numeric"
+                maxLength={2}
+                defaultValue={price}
               />
             </View>
-          ) : (
-            <FontAwesome5
-              onPress={() => setShowModal(true)}
-              name={"calendar"}
-              style={styles.flexItem}
-            />
-          )}
-        </View>
-        <View>
-          <Text style={styles.label}>Time</Text>
-          <TextInput
-            style={{ height: 40 }}
-            placeholder="Ex.) Takechi"
-            onChangeText={(newText) => setLname(newText)}
-            defaultValue={lname}
-          />
-        </View>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+
+      <View style={styles.btnsContainer}>
+        <SubmitBtn handleSubmit={handleSubmit} allFieldsTypedIn={allFieldsTypedIn} />
+        {/* <ResetBtn handleReset={handleReset} /> */}
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  form: {
-    marginVertical: 10,
-  },
   inputContainer: {
-    width: "50%",
+    marginVertical: 5,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  label: {
+    fontSize: 18,
+    color: "rgb(100, 100, 100)",
+    fontFamily: "Avenir",
+  },
+  dateTimeLabel: {
+    fontSize: 16,
+    marginBottom: 10,
+  },
+  input: {
+    fontSize: 18,
+    width: 150,
+    padding: 5,
+    borderBottomColor: "rgba(148, 148, 148, .3)",
+    borderBottomWidth: 1,
+    borderBottomEndRadius: 0,
+    borderBottomStartRadius: 0,
+    borderColor: "#ddd",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+  },
+  inputNumPad: {
+    width: 75,
+  },
+  dateTimeLabelInputContainer: {
+    marginVertical: 10,
+    flexDirection: "column",
+  },
+  dateTimeLabel: {
+    fontSize: 18,
+    marginBottom: 5,
+  },
+  container: {
+    height: "100%",
+    maxHeight: "70%",
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  scroller: {
+    width: "90%",
+    paddingRight: 10,
   },
   row: {
     flexDirection: "row",
-  },
-  dateAndIcon: {
-    flexDirection: "row",
     alignItems: "center",
   },
-  dateText: {
-    marginRight: 10,
+  mark: {
+    fontSize: 16,
+    marginBottom: 3,
+  },
+  btnsContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    maxHeight: 50,
+    marginTop: 20,
+  },
+  errorMsg: {
+    color: "red",
+    fontSize: 12,
+    fontFamily: "Avenir",
   },
 });

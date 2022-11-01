@@ -10,11 +10,11 @@ export default function Footer() {
 
 const styles = StyleSheet.create({
   footer: {
-    backgroundColor: "rgb(0, 110, 182)",
-    padding: 3,
+    backgroundColor: "white",
+    paddingBottom: 1,
   },
   text: {
-    color: "white",
+    color: "black",
     fontSize: 10,
     textAlign: "center",
   },

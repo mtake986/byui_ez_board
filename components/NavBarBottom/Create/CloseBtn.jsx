@@ -1,31 +1,32 @@
-import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import React from "react";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
 export default function CloseBtn({ modalVisible, setModalVisible }) {
   return (
-		<TouchableOpacity
-			style={[styles.buttonClose]}
-			onPress={() => setModalVisible(!modalVisible)}
-		>
-			<Text style={styles.close}>Close</Text>
-		</TouchableOpacity>
+    <TouchableOpacity
+      style={styles.closeBtn}
+      onPress={() => setModalVisible(!modalVisible)}
+    >
+      <Text style={styles.closeBtnText}>Close</Text>
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  buttonClose: {
-    width: 200,
+  closeBtn: {
+    position: "absolute",
+    bottom: 112,
+    width: "150%",
+    // flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center',
   },
-  close: {
+  closeBtnText: {
+    fontSize: 20,
     backgroundColor: "rgb(255, 240, 240)",
     color: "rgb(206,58,52)",
-    padding: 5,
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingHorizontal: 50,
+    paddingVertical: 20,
     textAlign: "center",
   },
 });

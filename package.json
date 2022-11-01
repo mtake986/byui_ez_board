@@ -19,9 +19,13 @@
     "react-native": "0.69.6",
     "react-native-calendars": "^1.1290.0",
     "react-native-date-picker": "^4.2.5",
+    "react-native-ionicons": "^4.6.5",
     "react-native-svg": "12.3.0",
     "react-native-vector-icons": "^9.2.0",
-    "uuidv4": "^6.2.13"
+    "uuidv4": "^6.2.13",
+    "react-native-web": "~0.18.7",
+    "react-dom": "18.0.0",
+    "@expo/webpack-config": "^0.17.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

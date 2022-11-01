@@ -42,11 +42,15 @@ export default function NavBarBottom() {
 
 const styles = StyleSheet.create({
   container: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
     backgroundColor: "rgb(228, 241, 247)",
+    height: 70,
   },
   flexItem: {
     color: "rgb(0, 110, 182)",

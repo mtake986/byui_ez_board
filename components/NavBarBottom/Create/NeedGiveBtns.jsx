@@ -13,9 +13,9 @@ const NeedGiveBtns = ({ boardType, setBoardType }) => {
 
 const styles = StyleSheet.create({
   btnContainer: {
-    marginTop: 10,
-    marginBottom: 10,
     flexDirection: "row",
+    justifyContent: "space-around",
+    marginVertical: 10,
   },
 });
 
